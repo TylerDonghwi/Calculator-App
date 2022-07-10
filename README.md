@@ -1,3 +1,6 @@
 # Calculator-App
 
-This is my first small TypeScript Project.
+Created a calculator app using JavaScript, CSS and HTML.
+Used ES6 classes to organize code and focused on syncing JavaScript code with a user interface.
+
+The project applies various CSS skills like grids and flexbox, to handle complex user interaction.
