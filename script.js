@@ -35,6 +35,7 @@ class Calculator {
         const current = parseFloat(this.currentOperand)
         if (isNaN(prev) || isNaN(current)) return
 
+        console.log(this.operation)
         switch (this.operation) {
             case '+':
                 computation = prev + current
@@ -42,10 +43,10 @@ class Calculator {
             case '-':
                 computation = prev - current
                 break
-            case '&#xf7;':
+            case '×':
                 computation = prev * current
                 break
-            case '&#215;':
+            case '÷':
                 computation = prev / current
                 break
             default:
@@ -56,9 +57,30 @@ class Calculator {
         this.previousOperand = ''
     }
 
+    getDisplayNumber(number) {
+        const stringNumber = number.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if (isNaN(integerDigits)) {
+            integerDisplay = ''
+        } else {
+            integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+        }
+
+        if (decimalDigits != null) {
+            return `${integerDisplay}.${decimalDigits}`
+        } else {
+            return integerDigits
+        }
+    }
+
     updateDisplay() {
-        this.currentOperandText.innerText = this.currentOperand
-        this.previousOperandText.innerText = this.previousOperand
+        this.currentOperandText.innerText = this.getDisplayNumber(this.currentOperand)
+        if (this.operation !== null) {
+            this.previousOperandText.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        }
+
     }
 }
 
@@ -70,7 +92,6 @@ const deleteBtn = document.querySelector('[data-delete]')
 const allClearBtn = document.querySelector('[data-all-clear]')
 const previousOperandText = document.querySelector('[data-previous-operand]')
 const currentOperandText = document.querySelector('[data-current-operand]')
-
 
 const calculator = new Calculator(previousOperandText, currentOperandText)
 
@@ -97,6 +118,7 @@ allClearBtn.addEventListener('click', button => {
     calculator.clear()
     calculator.updateDisplay()
 })
+
 deleteBtn.addEventListener('click', button => {
     calculator.delete()
     calculator.updateDisplay()
