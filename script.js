@@ -175,3 +175,14 @@ deleteBtn.addEventListener('click', () => {
     }
     calculator.updateDisplay()
 })
+
+// play click audio whenever a button is pressed
+const buttons = document.querySelectorAll('button')
+const audio = document.querySelector('#click')
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        audio.currentTime = 0
+        audio.play()
+    })
+})
