@@ -43,10 +43,10 @@ class Calculator {
                 computation = prev - current
                 break
             case '×':
-                computation = prev * current
+                computation = +parseFloat(prev * current).toFixed(8)
                 break
             case '÷':
-                computation = prev / current
+                computation = +parseFloat(prev / current).toFixed(8)
                 break
             default:
                 return
@@ -61,6 +61,7 @@ class Calculator {
         const integerDigits = parseFloat(stringNumber.split('.')[0])
         const decimalDigits = stringNumber.split('.')[1]
         let integerDisplay
+
         if (isNaN(integerDigits)) {
             integerDisplay = ''
         } else {
@@ -77,7 +78,7 @@ class Calculator {
     updateDisplay() {
         if (this.currentOperand !== NaN)
             this.currentOperandText.innerText = this.getDisplayNumber(this.currentOperand)
-        if (this.operation !== undefined) {
+        if (this.operation !== undefined && this.getDisplayNumber(this.previousOperand).length != 0) {
             this.previousOperandText.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandText.innerText = ''
