@@ -32,8 +32,13 @@ class Calculator {
     // when operand buttons are pressed 
     chooseOperation(operation) {
         // if there is nothing typed up in the screen return
-        if (this.currentOperand === '' || this.currentOperand === '.') return
+        if (this.currentOperand === '.') return
 
+
+        if (this.currentOperand === '' && this.previousOperand !== '') {
+            this.operation = operation
+            return
+        }
         // if there are something typed up in both current and previous operand, compute so you can carry on with operation for the next
         if (this.previousOperand !== '') {
             this.compute()
@@ -69,8 +74,6 @@ class Calculator {
             case '÷':
                 computation = +parseFloat(prev / current).toFixed(8)
                 break
-            default:
-                return
         }
 
         // update the operands for the screen to be updated
@@ -135,10 +138,14 @@ let complete = false
 numberBtns.forEach(button => {
     button.addEventListener('click', () => {
         // if the operation is complete, you can't type new numbers unless you press one of operands
-        if (!complete) {
+        if (complete) {
+            calculator.clear()
             calculator.appendNumber(button.innerText)
-            calculator.updateDisplay()
+            complete = false
+        } else {
+            calculator.appendNumber(button.innerText)
         }
+        calculator.updateDisplay()
     })
 })
 
