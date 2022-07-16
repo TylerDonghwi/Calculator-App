@@ -24,6 +24,7 @@ body {
 }
 
 .calculator-grid>button {
+    position: relative;
     cursor: pointer;
     font-size: 32px;
     border: 1px solid white;
@@ -32,6 +33,11 @@ body {
 
 .calculator-grid>button:hover {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+.calculator-grid>button:active {
+    left: 0.5px;
+    top: 0.5px;
 }
 
 .span-two {
