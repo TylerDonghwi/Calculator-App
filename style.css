@@ -16,6 +16,7 @@ body {
 }
 
 .calculator-grid {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     display: grid;
     justify-content: center;
     align-content: center;

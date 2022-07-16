@@ -32,7 +32,7 @@ class Calculator {
     // when operand buttons are pressed 
     chooseOperation(operation) {
         // if there is nothing typed up in the screen return
-        if (this.currentOperand === '') return
+        if (this.currentOperand === '' || this.currentOperand === '.') return
 
         // if there are something typed up in both current and previous operand, compute so you can carry on with operation for the next
         if (this.previousOperand !== '') {
@@ -170,9 +170,8 @@ allClearBtn.addEventListener('click', () => {
 deleteBtn.addEventListener('click', () => {
     if (complete) {
         calculator.clear()
-        calculator.updateDisplay()
     } else {
         calculator.delete()
-        calculator.updateDisplay()
     }
+    calculator.updateDisplay()
 })
